@@ -36,7 +36,16 @@ operations = {
 
 #---------------------
 def evaluate(x):
-    return x  # FIXME
+	if isinstance(x, (int, float)):  # Numbers
+    	    return x
+	elif isinstance(x, str):  # Operator
+	    return operations[x]
+	else:
+	    func = evaluate(x[0])
+	    args = []
+	    for exp in x[1:]:
+		args.append(evaluate(exp))
+	    return func(*args)
 
 #=====================
 def repl():
